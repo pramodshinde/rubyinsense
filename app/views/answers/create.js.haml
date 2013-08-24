@@ -1,0 +1,3 @@
+$(".answer_box").html("");
+$(".all_answers").append("#{escape_javascript(render partial: 'questions/question_show', locals: {answer: @answer})}");
+$('.all_answers').contents(":last-child").focus();

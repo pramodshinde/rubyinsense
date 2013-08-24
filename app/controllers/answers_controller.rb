@@ -10,10 +10,11 @@ class AnswersController < ApplicationController
     @answer = @question.answers.build(params['answer'])
     @answer.user = current_user
     if @answer.save
-      Twitter.update('@'+ current_user.twitter_handle + " added an answer to #rubyinsense..!! Here it is #{@question.url_shortner('http://rubyinsense.heroku.com/questions/#{@question.id}')}") unless Rails.env.development?
-      redirect_to question_path(@question)
+      #Twitter.update('@'+ current_user.twitter_handle + " added an answer to #rubyinsense..!! Here it is #{@question.url_shortner('http://rubyinsense.heroku.com/questions/#{@question.id}')}") unless Rails.env.development?
+      #redirect_to question_path(@question)
+      flash[:notice] = "Your answer added successfully"
     else
-      render action: :new
+      #render action: :new
     end
   end
 
