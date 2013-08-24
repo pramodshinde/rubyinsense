@@ -6,18 +6,25 @@
     .span6
       = image_tag 'box.jpg', size: '600x400'
     .span3
--#.row
+.row
   .pull-right
     = link_to 'Add Question', new_question_path, class: 'btn btn-info'
 %br
 .row
 .row
   - @questions.each do |ques|
-    .col-lg-4
+    .col-lg-4.main-box
+      - if ques.answer_count > 0
+        %h3.answer{title: "#{ques.answer_count} answer"}
+          %span
+            .glyphicon.glyphicon-bookmark.red
       .panel.panel-primary.box
         .panel-heading
           = render :partial => "questions/image", :locals => {:user => ques.user}
+          - if is_new?(ques)
+            %span.blink.new Recently Added
         = truncate(ques.statement, length: 180)
-        .pull-right
-          = link_to 'Detail', path_to_view(ques), class: 'btn btn-info'
-        %br
+        .info
+          .pull-right
+            = link_to 'Detail', path_to_view(ques), class: 'btn btn-info'
+          %br
